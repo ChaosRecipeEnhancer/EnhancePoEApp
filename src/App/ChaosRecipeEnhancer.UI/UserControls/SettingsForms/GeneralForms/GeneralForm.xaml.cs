@@ -52,14 +52,15 @@ internal partial class GeneralForm
     private void LogLocationDialog_Click(object sender, RoutedEventArgs e)
     {
         var open = new OpenFileDialog();
-        open.Filter = "Text|Client.txt";
+        open.Filter = "Text|Client.txt;KakaoClient.txt";
         var res = open.ShowDialog();
+
 
         if (res != DialogResult.OK) return;
 
         var filename = open.FileName;
 
-        if (filename.EndsWith("Client.txt"))
+        if (filename.EndsWith("Client.txt") || filename.EndsWith("KakaoClient.txt")) // redundant idc ChatGPT told me to
         {
             Settings.Default.PathOfExileClientLogLocation = filename;
             LogLocationDialog.Content = filename;
@@ -67,7 +68,7 @@ internal partial class GeneralForm
         else
         {
             MessageBox.Show(
-                "Invalid file selected. Make sure you're selecting the \"Client.txt\" file located in your main Path of Exile installation folder.",
+                "Invalid file selected. Make sure you're selecting the \"Client.txt\" or \"KakaoClient.txt\" file located in your main Path of Exile installation folder.",
                 "Missing Settings", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }

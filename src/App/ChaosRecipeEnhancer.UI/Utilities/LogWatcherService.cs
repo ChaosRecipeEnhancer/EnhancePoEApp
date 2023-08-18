@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using ChaosRecipeEnhancer.UI.Models.Enums;
 using ChaosRecipeEnhancer.UI.Properties;
 using ChaosRecipeEnhancer.UI.Windows;
 
@@ -32,7 +33,7 @@ public class LogWatcherManager
         using var wh = new AutoResetEvent(false);
         using var fsw = new FileSystemWatcher(Path.GetDirectoryName(@"" + Settings.Default.PathOfExileClientLogLocation))
         {
-            Filter = "Client.txt",
+            Filter = Settings.Default.PathOfExileClientLogLocation.EndsWith("KakaoClient.txt") ? "KakaoClient.txt" : "Client.txt",
             EnableRaisingEvents = true
         };
 
